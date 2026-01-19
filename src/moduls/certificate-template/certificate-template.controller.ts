@@ -1,15 +1,25 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CertificateTemplateService } from './certificate-template.service';
 import { CreateCertificateTemplateDto } from './dto/create-certificate-template.dto';
 import { UpdateCertificateTemplateDto } from './dto/update-certificate-template.dto';
 
 @Controller('certificate-template')
 export class CertificateTemplateController {
-  constructor(private readonly certificateTemplateService: CertificateTemplateService) {}
+  constructor(
+    private readonly certificateTemplateService: CertificateTemplateService,
+  ) {}
 
   @Post()
-  create(@Body() createCertificateTemplateDto: CreateCertificateTemplateDto) {
-    return this.certificateTemplateService.create(createCertificateTemplateDto);
+  create(@Body() dto: CreateCertificateTemplateDto) {
+    return this.certificateTemplateService.create(dto);
   }
 
   @Get()
@@ -23,8 +33,8 @@ export class CertificateTemplateController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCertificateTemplateDto: UpdateCertificateTemplateDto) {
-    return this.certificateTemplateService.update(+id, updateCertificateTemplateDto);
+  update(@Param('id') id: string, @Body() dto: UpdateCertificateTemplateDto) {
+    return this.certificateTemplateService.update(+id, dto);
   }
 
   @Delete(':id')

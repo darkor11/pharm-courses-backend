@@ -7,6 +7,8 @@ async function bootstrap() {
   const app = await NestFactory.create(CoreModule);
   app.useGlobalPipes(new ValidationPipe());
 
+  app.enableCors({ origin: true, credentials: true });
+
   const config = new DocumentBuilder()
     .setTitle('test')
     .setDescription('The cats API description')

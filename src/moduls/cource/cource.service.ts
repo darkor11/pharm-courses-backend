@@ -7,14 +7,13 @@ import { PrismaService } from 'src/core/prisma/prisma.service';
 export class CourceService {
   constructor(private readonly prisma: PrismaService) {}
   create(dto: CreateCourceDto) {
-    //@ts-ignore
     return this.prisma.course.create({ data: dto });
   }
 
   findAll() {
     return this.prisma.course.findMany();
   }
-  
+
   findByStatus(status: string) {
     if (status !== 'PLANNED' && status !== 'ARCHIVED') {
       throw new BadRequestException('Course status is invalid');
@@ -27,11 +26,11 @@ export class CourceService {
   }
 
   update(id: number, dto: UpdateCourceDto) {
-    //@ts-ignore
     return this.prisma.course.update({ where: { id }, data: dto });
   }
 
-  remove(id: number) {
-    return this.prisma.course.delete({ where: { id } });
+  async remove(id: number) {
+    await this.prisma.course.delete({ where: { id } });
+    return;
   }
 }
