@@ -9,6 +9,7 @@ import {
   IsNumber,
   IsOptional,
   IsPositive,
+  isString,
   IsString,
 } from 'class-validator';
 import { CourseStatus } from 'prisma/generated/enums';
@@ -30,19 +31,19 @@ export class CreateCourceDto {
 
   @ApiProperty()
   @IsDateString()
-  endDate: Date;
+  @IsOptional()
+  endDate?: Date;
 
   @ApiProperty()
-  @IsJSON()
-  description: any;
+  @IsString()
+  description: string;
 
   @ApiProperty()
   @IsEnum(CourseStatus)
   status: CourseStatus;
 
   @ApiProperty()
-  @IsBoolean()
-  @ApiProperty()
   @IsOptional()
+  @IsNumber()
   certificateTemplateId?: number;
 }
